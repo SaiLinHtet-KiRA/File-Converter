@@ -1,6 +1,4 @@
 import { ArrowUpTray } from "../../svg";
-import Header from "../Header";
-import Text from "../Text";
 
 export default function SelectFile() {
   return (
