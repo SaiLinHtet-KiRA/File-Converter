@@ -47,7 +47,7 @@ export default class NavBar extends React.Component {
     console.log(this.state.convertHovered);
     return (
       <nav
-        className="sticky top-0 w-screen h-fit    px-[10%] flex flex-col shadow-sm"
+        className="sticky top-0 w-screen h-fit    px-[10%] flex flex-col shadow-sm bg-white"
         onMouseLeave={() => this.HandelRemoveHover()}
       >
         <header
@@ -62,8 +62,32 @@ export default class NavBar extends React.Component {
                 className="inline-flex items-center gap-1 cursor-pointer"
                 onMouseEnter={() => this.HandelHover(label)}
               >
-                <span className="font-light">{label}</span>
-                <ChevronDown className="size-4 stroke-2" />
+                <span
+                  className="font-light"
+                  style={{
+                    color:
+                      label == "Convert" && this.state.convertHovered
+                        ? "color-mix(in oklab, var(--color-cyan-300) /* oklch(86.5% 0.127 207.078) = #53eafd */ 80%, transparent)"
+                        : label == "API" && this.state.apiHovered
+                        ? "color-mix(in oklab, var(--color-cyan-300) /* oklch(86.5% 0.127 207.078) = #53eafd */ 80%, transparent)"
+                        : "",
+                  }}
+                >
+                  {" "}
+                  {label}
+                </span>
+
+                <ChevronDown
+                  className="size-4 stroke-2"
+                  style={{
+                    stroke:
+                      label == "Convert" && this.state.convertHovered
+                        ? "color-mix(in oklab, var(--color-cyan-300) /* oklch(86.5% 0.127 207.078) = #53eafd */ 80%, transparent)"
+                        : label == "API" && this.state.apiHovered
+                        ? "color-mix(in oklab, var(--color-cyan-300) /* oklch(86.5% 0.127 207.078) = #53eafd */ 80%, transparent)"
+                        : "",
+                  }}
+                />
               </div>
             ))}
           </main>
