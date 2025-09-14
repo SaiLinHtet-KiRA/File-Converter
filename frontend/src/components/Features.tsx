@@ -1,6 +1,5 @@
 import React from "react";
 import { EmptyDocument, GlobeAlt, ShieldCheck } from "../svg";
-import Header from "./Header";
 
 export default function Features() {
   const features = [

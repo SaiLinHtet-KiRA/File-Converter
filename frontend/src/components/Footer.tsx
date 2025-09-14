@@ -89,7 +89,7 @@ export default function Footer() {
               Developed By -{" "}
             </span>
             <div className="flex gap-2 items-center">
-              {DeveloperContacts.map(({ icon, link, platform }) => (
+              {DeveloperContacts.map(({ icon, link }) => (
                 <a href={link} target="_blank" className="relative size-6 ">
                   {React.createElement(icon, {
                     className:
