@@ -1,5 +1,6 @@
 import React from "react";
 import { Camera, Search, Images, Document, GIF, ChevronDown } from "../svg";
+import { motion } from "motion/react";
 
 export default class NavBar extends React.Component {
   state: Readonly<{ convertHovered: boolean; apiHovered: boolean }>;
@@ -22,32 +23,32 @@ export default class NavBar extends React.Component {
   }
   render(): React.ReactNode {
     const NavLabel = ["Convert", "API"];
-    const futureForConvert = [
+    const conversionCategories = [
       {
-        type: "Video & audio",
+        category: "Video & Audio",
         icon: Camera,
-        future: ["Video Converter", "Audio Converter", "Video to Audio"],
+        tools: ["Video Converter", "Audio Converter", "Video to Audio"],
       },
       {
-        type: "Images",
+        category: "Images",
         icon: Images,
-        future: ["Images Converter", "Images to PDF"],
+        tools: ["Images Converter", "Images to PDF"],
       },
       {
-        type: "Document",
+        category: "Document",
         icon: Document,
-        future: ["PDF to Images", "Excel to PDF", "JSON to Excel"],
+        tools: ["PDF to Images", "Excel to PDF", "JSON to Excel"],
       },
       {
-        type: "GIF",
+        category: "GIF",
         icon: GIF,
-        future: ["Images to GIF", "Video to GIF", "GIF to Images"],
+        tools: ["Images to GIF", "Video to GIF", "GIF to Images"],
       },
     ];
-    console.log(this.state.convertHovered);
+
     return (
       <nav
-        className="sticky top-0 w-screen h-fit    px-[10%] flex flex-col shadow-sm bg-white"
+        className="sticky top-0 w-screen h-fit    px-[10%] flex flex-col shadow-sm bg-white z-100"
         onMouseLeave={() => this.HandelRemoveHover()}
       >
         <header
@@ -100,19 +101,24 @@ export default class NavBar extends React.Component {
         {this.state.convertHovered && (
           <footer className="grid grid-cols-4 pt-2 pb-8 gap-10">
             {this.state.convertHovered &&
-              futureForConvert.map(({ future, icon, type }) => (
-                <section className="flex flex-col gap-2 " key={type}>
+              conversionCategories.map(({ category, icon, tools }, index) => (
+                <section className="flex flex-col gap-2 " key={category}>
                   <header className="flex items-center gap-1 border-b-2 border-gray-300/50 p-3">
                     {React.createElement(icon, { className: "size-5" })}
-                    <h1 className="font-semibold">{type}</h1>
+                    <h1 className="font-semibold">{category}</h1>
                   </header>
-                  <main className="flex flex-col gap-0.5 pl-3">
-                    {future.map((future) => (
+                  <motion.main
+                    className="flex flex-col gap-0.5 pl-3  !ease-linear"
+                    initial={{ x: 30, opacity: [0] }}
+                    animate={{ x: 0, opacity: [0, 0, 100] }}
+                    transition={{ delay: 0.05 * index }}
+                  >
+                    {tools.map((tools) => (
                       <h2 className="w-fit text-sm font-medium px-2 py-1.5 cursor-pointer rounded-lg hover:bg-cyan-300/80 hover:text-white ">
-                        {future}
+                        {tools}
                       </h2>
                     ))}
-                  </main>
+                  </motion.main>
                 </section>
               ))}
           </footer>
